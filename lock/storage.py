@@ -14,3 +14,10 @@ def store_data_to_file(data: dict, filename: str = "lock_db.json"):
     except FileNotFoundError:
         raise FileNotFoundError("File not found")
 
+def store_password(website: str, 
+                   login: str, 
+                   password: str, 
+                   filename: str = "lock_db.json"):
+    data = load_data_from_file(filename)
+    data[website] = {login: password}
+    store_data_to_file(data)

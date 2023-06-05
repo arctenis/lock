@@ -14,5 +14,17 @@ def check_password_strength(password: str) -> bool:
     has_special = any(not char.isalnum() for char in password)
     return all([valid_length, has_digit, has_upper, has_lower, has_special])
 
+def generate_passphrase(length: int) -> str:
+    """Generate a passphrase of a given length"""
+    try:
+        with open("words.txt") as f:
+            words = [word.strip() for word in f]
+            passphrase = " ".join(secrets.choice(words) for i in range(length))
+            print(f"Passphrase : {passphrase}")
+    except FileNotFoundError:
+        raise FileNotFoundError("Words dictionary not found")
+    return passphrase
+
+
 
 
