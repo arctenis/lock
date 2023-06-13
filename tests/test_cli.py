@@ -3,10 +3,6 @@ from typer.testing import CliRunner
 from lock.cli import app
 
 
-def test_check_strong_password_strength():
-    password = "azerAZER1234@"
-    assert check_password_strength(password) == True
-
 def test_create_command():
     runner = CliRunner()
     default_password_length = 16

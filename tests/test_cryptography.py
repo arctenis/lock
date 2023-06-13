@@ -22,3 +22,18 @@ def test_check_strong_password_strength():
 def test_generate_passphrase():
     passphrase = generate_passphrase(4)
     assert len(passphrase.split()) == 4
+    for word in passphrase.split():
+        assert len(word) >= 4
+
+
+@pytest.mark.parametrize("passphrase", 
+                         ["a b c d",
+                          "abcde fghij klmno",
+                          "a b cdefg hijklm",
+                          ])
+def test_check_weak_passphrase_strength(passphrase):
+    assert check_passphrase_strength(passphrase) == False
+
+def test_check_strong_passphrase_strength():
+    passphrase = "horse battery staple correct"
+    assert check_passphrase_strength(passphrase) == True
