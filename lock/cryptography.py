@@ -1,9 +1,19 @@
 import secrets
+import string
 
 
 def create_password(length: int) -> str:
     """Create a password of a given length"""
-    return secrets.token_urlsafe(length)[:length]
+    symbols = "!@#$%^&*()_+-=[]{};:,./<>?"
+    characters = string.ascii_letters + string.digits + symbols
+    while True:
+        password = "".join(secrets.choice(characters) for i in range(length))
+        if (any(c.islower() for c in password)
+                and any(c.isupper() for c in password)
+                and sum(c.isdigit() for c in password) >= 3
+                and any(c in symbols for c in password)):
+            break
+    return password
 
 
 def check_password_strength(password: str) -> bool:
