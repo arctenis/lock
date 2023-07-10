@@ -13,7 +13,7 @@ def create_password(length: int) -> str:
     if length < MIN_PASSWORD_LENGTH:
         raise ValueError("Password length must be at least 8 characters")
 
-    symbols = "!@#$%^&*()_+-=[]{};:,./<>?"
+    symbols = "!@#$%&*()_+-=[]{};:,.<>?"
     characters = string.ascii_letters + string.digits + symbols
 
     while True:
@@ -49,7 +49,7 @@ def check_password_strength(password: str) -> bool:
 
     return all([valid_length, has_digit, has_upper, has_lower, has_special])
 
-def generate_passphrase(length: int) -> str:
+def create_passphrase(length: int) -> str:
     """
     Generate a passphrase of a given length
     """
