@@ -1,7 +1,8 @@
 import typer
 from typing_extensions import Annotated
 
-from .cryptography import create_password
+from password import create_password
+from storage import store_password
 
 
 app = typer.Typer()
@@ -15,7 +16,11 @@ def create(length: Annotated[int, typer.Option(help="Give password length")] = 1
 @app.command()
 def store(login: Annotated[str, typer.Argument(..., help="Login name")],
           password: Annotated[str, typer.Argument(..., help="Password")]):
-    typer.echo(f"{login} {password}")
+    typer.echo(f"Login: {login}\nPassword: {password}")
+    try:
+        store_password(login, password)
+    except Exception as e:
+        typer.echo(f"Error storing password : {e}")
 
 
 if __name__ == "__main__":
