@@ -8,4 +8,3 @@ when needed.
 
 - Typer
 - cryptography
-
