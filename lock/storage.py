@@ -1,11 +1,13 @@
 import json
 
+
 def load_data_from_file(filename: str = "lock_db.json"):
     try:
-        with open(filename) as f:
-            return json.load(f)
+        with open(filename, "w") as f:
+            data = json.load(f)
     except FileNotFoundError:
-        return {}
+        raise FileNotFoundError("Database not found")
+    return data
 
 def store_credentials_to_file(credentials: dict, filename: str = "lock_db.json"):
     try:
@@ -24,7 +26,7 @@ def store_credentials_to_file(credentials: dict, filename: str = "lock_db.json")
 
 def store_password(login: str, 
                    password: str, 
-                   context: str = "default",
+                   context: str = "",
                    filename: str = "lock_db.json"):
     data = load_data_from_file(filename)
     data[context] = {login: password}
