@@ -1,3 +1,6 @@
+# Part of Lock : CLI personal password manager
+# https://github.com/arctenis/lock
+
 with open("words.txt", "r") as f:
     lines = f.readlines()
 
